@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET: MyFinanceWeb.Mvc",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/MyFinanceWeb.Mvc/bin/Debug/net8.0/MyFinanceWeb.Mvc.dll",
+      "cwd": "${workspaceFolder}/MyFinanceWeb.Mvc",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "https://localhost:7291;http://localhost:5267",
+        "ASPNETCORE_HTTPS_PORT": "7291"
+      },
+      "stopAtEntry": false,
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+        "uriFormat": "%s"
+      }
+    }
+  ]
+}
