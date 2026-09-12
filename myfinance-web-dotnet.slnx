@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="MyFinanceWeb.Domain/MyFinanceWeb.Domain.csproj" />
+  <Project Path="MyFinanceWeb.Infra/MyFinanceWeb.Infra.csproj" />
   <Project Path="MyFinanceWeb.Mvc/MyFinanceWeb.Mvc.csproj" />
+  <Project Path="MyFinanceWeb.Service/MyFinanceWeb.Service.csproj" />
 </Solution>
