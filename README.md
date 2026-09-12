@@ -1,8 +1,10 @@
 # MyFinance Web
 
-Aplicacao web de controle financeiro criada com ASP.NET Core MVC, .NET 8, Entity Framework Core e PostgreSQL 16.
+Aplicação Web de controle financeiro criada com ASP.NET Core MVC, .NET 8, Entity Framework Core e PostgreSQL 16 para fins de estudo ne disciplina prática sobre implementação e evolução de software, da pós graduação em Engenharia de Sofware pela PUC Minas.
 
 Este documento explica o funcionamento interno do projeto em uma linguagem voltada tambem para quem esta conhecendo ASP.NET MVC.
+
+Obs.: O projeto não implementa todas a melhores práticas de codificação pois teve mais foco no propósito e ementa da disciplina.
 
 ## 1. Visao geral
 
