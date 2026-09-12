@@ -1,49 +1,35 @@
 namespace MyFinanceWeb.Service;
 
-using Microsoft.EntityFrameworkCore;
 using MyFinanceWeb.Domain.Entities;
-using MyFinanceWeb.Infra;
+using MyFinanceWeb.Infra.Interfaces;
 using MyFinanceWeb.Service.Interfaces;
 
 public class TransacaoService : ITransacaoService
 {
-    private readonly MyFinanceDbContext _dbContext;
+    private readonly ITransacaoRepository _transacaoRepository;
 
-    public TransacaoService(MyFinanceDbContext dbContext)
+    public TransacaoService(ITransacaoRepository transacaoRepository)
     {
-        _dbContext = dbContext;
+        _transacaoRepository = transacaoRepository;
     }
 
-    public void Cadastrar(Transacao transacao)
+    public void Cadastrar(Transacao entity)
     {
-        if (transacao.Id == 0)
-        {
-            _dbContext.Transacoes.Add(transacao);
-        }
-        else
-        {
-            _dbContext.Transacoes.Update(transacao);
-        }
-        _dbContext.SaveChanges();
+        _transacaoRepository.Cadastrar(entity);
     }
 
-    public void Excluir(int id)
+    public bool Excluir(int id)
     {
-        var transacao = _dbContext.Transacoes.Find(id);
-        if (transacao != null)
-        {
-            _dbContext.Transacoes.Remove(transacao);
-            _dbContext.SaveChanges();
-        }
+        return _transacaoRepository.Excluir(id);
     }
 
     public List<Transacao> ListarRegistros()
     {
-        return _dbContext.Transacoes.Include(t => t.PlanoConta).ToList();
+        return _transacaoRepository.ListarRegistros();
     }
 
     public Transacao? RetornarRegistro(int id)
     {
-        return _dbContext.Transacoes.Include(t => t.PlanoConta).FirstOrDefault(t => t.Id == id);
+        return _transacaoRepository.RetornarRegistro(id);
     }
 }

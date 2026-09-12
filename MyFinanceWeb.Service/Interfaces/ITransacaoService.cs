@@ -1,11 +1,7 @@
-using MyFinanceWeb.Domain.Entities;
+using MyFinanceWeb.Infra.Interfaces;
 
 namespace MyFinanceWeb.Service.Interfaces;
 
-public interface ITransacaoService
+public interface ITransacaoService : ITransacaoRepository
 {
-    void Cadastrar(Transacao transacao);
-    void Excluir(int id);
-    List<Transacao> ListarRegistros();
-    Transacao? RetornarRegistro(int id);
 }

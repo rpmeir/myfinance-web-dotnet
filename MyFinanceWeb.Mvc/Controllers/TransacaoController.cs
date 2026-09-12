@@ -35,8 +35,8 @@ public class TransacaoController : Controller
                 Id = transacao.Id,
                 Historico = transacao.Historico,
                 Data = transacao.Data,
-                Valor = transacao.Valor,
-                Tipo = transacao.PlanoConta.Tipo,
+                Valor = transacao.Valor * (transacao.PlanoConta.Tipo == 'D' ? -1 : 1),
+                Tipo = transacao.PlanoConta.Descricao,
                 PlanoContaId = transacao.PlanoContaId
             });
         }
@@ -68,7 +68,7 @@ public class TransacaoController : Controller
             Historico = transacao.Historico,
             Data = transacao.Data,
             Valor = transacao.Valor,
-            Tipo = transacao.PlanoConta.Tipo,
+            Tipo = transacao.PlanoConta.Tipo.ToString(),
             PlanoContaId = transacao.PlanoContaId
         };
         return View(transacaoModel);

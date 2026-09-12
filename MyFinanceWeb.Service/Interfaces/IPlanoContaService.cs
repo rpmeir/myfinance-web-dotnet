@@ -1,11 +1,7 @@
-using MyFinanceWeb.Domain.Entities;
+using MyFinanceWeb.Infra.Interfaces;
 
 namespace MyFinanceWeb.Service.Interfaces;
 
-public interface IPlanoContaService
+public interface IPlanoContaService : IPlanoContaRepository
 {
-    void Cadastrar(PlanoConta planoConta);
-    bool Excluir(int id);
-    List<PlanoConta> ListarRegistros();
-    PlanoConta? RetornarRegistro(int id);
 }

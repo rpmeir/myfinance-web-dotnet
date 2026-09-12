@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using MyFinanceWeb.Infra;
 using MyFinanceWeb.Service.Interfaces;
 using MyFinanceWeb.Service;
+using MyFinanceWeb.Infra.Interfaces;
+using MyFinanceWeb.Infra.Repositories;
 using Npgsql;
 
 DotNetEnv.Env.NoClobber().TraversePath().Load();
@@ -30,6 +32,9 @@ builder.Services.AddDbContext<MyFinanceDbContext>(
 
 builder.Services.AddScoped<IPlanoContaService, PlanoContaService>();
 builder.Services.AddScoped<ITransacaoService, TransacaoService>();
+
+builder.Services.AddScoped<IPlanoContaRepository, PlanoContaRepository>();
+builder.Services.AddScoped<ITransacaoRepository, TransacaoRepository>();
 
 var app = builder.Build();
 

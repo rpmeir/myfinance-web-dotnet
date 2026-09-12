@@ -26,6 +26,9 @@ public class MyFinanceDbContext : DbContext
         modelBuilder.Entity<Transacao>(entity =>
         {
             entity.ToTable("transacao");
+            entity.HasOne(item => item.PlanoConta)
+                .WithMany()
+                .HasForeignKey(item => item.PlanoContaId);
             entity.Property(item => item.Id).HasColumnName("id");
             entity.Property(item => item.Historico).HasColumnName("historico");
             entity.Property(item => item.Data)

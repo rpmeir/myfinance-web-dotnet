@@ -6,6 +6,6 @@ public class TransacaoModel
     public string Historico { get; set; } = string.Empty;
     public DateTime Data { get; set; }
     public decimal Valor { get; set; }
-    public char? Tipo { get; set; }
+    public string Tipo { get; set; } = string.Empty;
     public int PlanoContaId { get; set; }
 }
