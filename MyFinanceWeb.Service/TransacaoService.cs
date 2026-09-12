@@ -1,5 +1,6 @@
 namespace MyFinanceWeb.Service;
 
+using Microsoft.EntityFrameworkCore;
 using MyFinanceWeb.Domain.Entities;
 using MyFinanceWeb.Infra;
 using MyFinanceWeb.Service.Interfaces;
@@ -38,11 +39,11 @@ public class TransacaoService : ITransacaoService
 
     public List<Transacao> ListarRegistros()
     {
-        return _dbContext.Transacoes.ToList();
+        return _dbContext.Transacoes.Include(t => t.PlanoConta).ToList();
     }
 
     public Transacao? RetornarRegistro(int id)
     {
-        return _dbContext.Transacoes.Find(id) ?? null;
+        return _dbContext.Transacoes.Include(t => t.PlanoConta).FirstOrDefault(t => t.Id == id);
     }
 }

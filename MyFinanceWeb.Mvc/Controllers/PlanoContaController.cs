@@ -81,7 +81,11 @@ public class PlanoContaController : Controller
     [Route("Excluir/{id}")]
     public IActionResult Excluir(int id)
     {
-        _planoContaService.Excluir(id);
+        if (!_planoContaService.Excluir(id))
+        {
+            return Conflict("Não é possível excluir este plano de contas porque ele possui transações associadas.");
+        }
+
         return NoContent();
     }
 

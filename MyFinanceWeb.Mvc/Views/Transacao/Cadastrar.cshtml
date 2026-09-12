@@ -1,0 +1,56 @@
+@model MyFinanceWeb.Mvc.Models.TransacaoModel
+
+@{
+    ViewBag.Title = "Cadastrar Transação";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<form id="transacaoForm" asp-controller="Transacao" asp-action="Cadastrar" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Data)
+        @Html.TextBoxFor(
+            model => model.Data,
+            "{0:yyyy-MM-dd}",
+            new
+            {
+                @class = "form-control",
+                type = "date"
+            }
+        )
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Valor)
+        @Html.TextBox("ValorDisplay",
+            Model.Valor.ToString(
+                "N2",
+                System.Globalization.CultureInfo.GetCultureInfo("pt-BR")
+            ),
+            new { @class = "form-control", type = "text", inputmode = "decimal", autocomplete = "off" }
+        )
+        @Html.TextBoxFor(model => model.Valor, new { @class = "form-control", type = "hidden" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.PlanoContaId)
+        @Html.DropDownListFor(
+            model => model.PlanoContaId,
+            new SelectList(ViewBag.PlanoContaList,
+                "Id",
+                "Descricao"
+            ),
+            "Selecione",
+            new { @class = "form-control" }
+        )
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Historico)
+        @Html.TextBoxFor(model => model.Historico, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-block btn-primary mt-3">Salvar</button>
+    <a asp-controller="Transacao" asp-action="Index" class="btn btn-secondary mt-3">Cancelar</a>
+</form>
+
+@section Scripts {
+    <script src="~/js/Transacao/Cadastrar.js" asp-append-version="true"></script>
+}

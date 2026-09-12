@@ -23,7 +23,9 @@ public class MyFinanceDbContext(DbContextOptions<MyFinanceDbContext> options) : 
             entity.ToTable("transacao");
             entity.Property(item => item.Id).HasColumnName("id");
             entity.Property(item => item.Historico).HasColumnName("historico");
-            entity.Property(item => item.Data).HasColumnName("data");
+            entity.Property(item => item.Data)
+                .HasColumnName("data")
+                .HasColumnType("date");
             entity.Property(item => item.Valor).HasColumnName("valor");
             entity.Property(item => item.PlanoContaId).HasColumnName("planocontaid");
         });

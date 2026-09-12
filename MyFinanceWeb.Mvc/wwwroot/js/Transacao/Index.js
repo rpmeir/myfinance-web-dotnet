@@ -1,10 +1,10 @@
     function Novo() {
-        window.location.href = '/PlanoConta/Cadastrar';
+        window.location.href = '/Transacao/Cadastrar';
     }
 
     function Atualizar(id) {
         // Implement the logic to handle the "Editar" action
-        window.location.href = '/PlanoConta/Cadastrar/' + id;
+        window.location.href = '/Transacao/Cadastrar/' + id;
     }
 
     function Excluir(id) {
@@ -12,14 +12,12 @@
             return;
         }
 
-        fetch('/PlanoConta/Excluir/' + id, {
+        fetch('/Transacao/Excluir/' + id, {
             method: 'DELETE'
         })
             .then(function (response) {
                 if (!response.ok) {
-                    return response.text().then(function (message) {
-                        throw new Error(message || 'Falha ao excluir o item.');
-                    });
+                    throw new Error('Falha ao excluir o item.');
                 }
 
                 window.location.reload();

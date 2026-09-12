@@ -26,14 +26,22 @@ public class PlanoContaService : IPlanoContaService
         _dbContext.SaveChanges();
     }
 
-    public void Excluir(int id)
+    public bool Excluir(int id)
     {
         var planoConta = _dbContext.PlanoContas.Find(id);
-        if (planoConta != null)
+        if (planoConta == null)
         {
-            _dbContext.PlanoContas.Remove(planoConta);
-            _dbContext.SaveChanges();
+            return false;
         }
+
+        if (_dbContext.Transacoes.Any(item => item.PlanoContaId == id))
+        {
+            return false;
+        }
+
+        _dbContext.PlanoContas.Remove(planoConta);
+        _dbContext.SaveChanges();
+        return true;
     }
 
     public List<PlanoConta> ListarRegistros()
