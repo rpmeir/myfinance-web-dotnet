@@ -1,0 +1,37 @@
+@{
+    ViewBag.Title = "Plano de Contas";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<button type="button" class="btn btn-block btn-primary mb-3" onclick="Novo()">Criar item de Plano Conta</button>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descrição</th>
+            <th>Tipo</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in (List<PlanoContaModel>)ViewBag.PlanoContaList)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Descricao</td>
+                <td>@item.Tipo</td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-warning" onclick="Atualizar(@item.Id)">Editar</button>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="Excluir(@item.Id)">Excluir</button>
+                </td>
+            </tr>
+        }
+        <!-- Table rows will go here -->
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="~/js/PlanoConta/Index.js" asp-append-version="true"></script>
+}

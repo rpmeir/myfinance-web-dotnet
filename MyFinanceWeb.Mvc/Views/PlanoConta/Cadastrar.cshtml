@@ -1,0 +1,28 @@
+@model MyFinanceWeb.Mvc.Models.PlanoContaModel
+
+@{
+    ViewBag.Title = "Cadastrar Plano de Conta";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<form asp-controller="PlanoConta" asp-action="Cadastrar" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Descricao)
+        @Html.TextBoxFor(model => model.Descricao, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Tipo)
+        <div class="form-check">
+            @Html.RadioButtonFor(model => model.Tipo, "R", new { @class = "form-check-input", @id = "Tipo_R" })
+            @Html.LabelFor(model => model.Tipo, "Receita", new { @class = "form-check-label", @for = "Tipo_R" })
+        </div>
+        <div class="form-check">
+            @Html.RadioButtonFor(model => model.Tipo, "D", new { @class = "form-check-input", @id = "Tipo_D" })
+            @Html.LabelFor(model => model.Tipo, "Despesa", new { @class = "form-check-label", @for = "Tipo_D" })
+        </div>
+    </div>
+    <button type="submit" class="btn btn-block btn-primary mt-3">Salvar</button>
+    <a asp-controller="PlanoConta" asp-action="Index" class="btn btn-secondary mt-3">Cancelar</a>
+</form>

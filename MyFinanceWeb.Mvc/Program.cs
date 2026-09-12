@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyFinanceWeb.Infra;
+using MyFinanceWeb.Service.Interfaces;
+using MyFinanceWeb.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,8 +9,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<MyFinanceDbContext>(
-    options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+    options => options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+        ?? throw new InvalidOperationException(
+            "A connection string 'DefaultConnection' nao foi configurada."
+        )
+    )
 );
+
+builder.Services.AddScoped<IPlanoContaService, PlanoContaService>();
+builder.Services.AddScoped<ITransacaoService, TransacaoService>();
 
 var app = builder.Build();
 

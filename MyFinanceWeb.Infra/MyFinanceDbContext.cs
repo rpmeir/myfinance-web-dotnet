@@ -8,8 +8,24 @@ public class MyFinanceDbContext(DbContextOptions<MyFinanceDbContext> options) : 
     public DbSet<PlanoConta> PlanoContas { get; set; }
     public DbSet<Transacao> Transacoes { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=myfinance;Username=postgres;Password=123456");
+        modelBuilder.Entity<PlanoConta>(entity =>
+        {
+            entity.ToTable("planoconta");
+            entity.Property(item => item.Id).HasColumnName("id");
+            entity.Property(item => item.Descricao).HasColumnName("descricao");
+            entity.Property(item => item.Tipo).HasColumnName("tipo");
+        });
+
+        modelBuilder.Entity<Transacao>(entity =>
+        {
+            entity.ToTable("transacao");
+            entity.Property(item => item.Id).HasColumnName("id");
+            entity.Property(item => item.Historico).HasColumnName("historico");
+            entity.Property(item => item.Data).HasColumnName("data");
+            entity.Property(item => item.Valor).HasColumnName("valor");
+            entity.Property(item => item.PlanoContaId).HasColumnName("planocontaid");
+        });
     }
 }
