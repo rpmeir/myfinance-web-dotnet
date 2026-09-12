@@ -3,10 +3,15 @@ using MyFinanceWeb.Domain.Entities;
 
 namespace MyFinanceWeb.Infra;
 
-public class MyFinanceDbContext(DbContextOptions<MyFinanceDbContext> options) : DbContext(options)
+public class MyFinanceDbContext : DbContext
 {
     public DbSet<PlanoConta> PlanoContas { get; set; }
     public DbSet<Transacao> Transacoes { get; set; }
+
+    public MyFinanceDbContext(DbContextOptions<MyFinanceDbContext> options)
+        : base(options)
+    {
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
