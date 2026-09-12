@@ -2,19 +2,30 @@ using Microsoft.EntityFrameworkCore;
 using MyFinanceWeb.Infra;
 using MyFinanceWeb.Service.Interfaces;
 using MyFinanceWeb.Service;
+using Npgsql;
+
+DotNetEnv.Env.NoClobber().TraversePath().Load();
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException(
+        "A connection string 'DefaultConnection' nao foi configurada."
+    );
+var databasePassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD")
+    ?? throw new InvalidOperationException(
+        "A variavel de ambiente 'POSTGRES_PASSWORD' nao foi configurada."
+    );
+var connectionStringBuilder = new NpgsqlConnectionStringBuilder(connectionString)
+{
+    Password = databasePassword
+};
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<MyFinanceDbContext>(
-    options => options.UseNpgsql(
-        builder.Configuration.GetConnectionString("DefaultConnection")
-        ?? throw new InvalidOperationException(
-            "A connection string 'DefaultConnection' nao foi configurada."
-        )
-    )
+    options => options.UseNpgsql(connectionStringBuilder.ConnectionString)
 );
 
 builder.Services.AddScoped<IPlanoContaService, PlanoContaService>();
