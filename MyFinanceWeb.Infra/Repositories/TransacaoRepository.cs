@@ -8,15 +8,13 @@ namespace MyFinanceWeb.Infra.Repositories
     {
         public override List<Transacao> ListarRegistros()
         {
-            return _db.Set<Transacao>()
-                .Include(transacao => transacao.PlanoConta)
+            return _dbSet.Include(transacao => transacao.PlanoConta)
                 .ToList();
         }
 
         public override Transacao? RetornarRegistro(int id)
         {
-            return _db.Set<Transacao>()
-                .Include(transacao => transacao.PlanoConta)
+            return _dbSet.Include(transacao => transacao.PlanoConta)
                 .FirstOrDefault(transacao => transacao.Id == id);
         }
     }

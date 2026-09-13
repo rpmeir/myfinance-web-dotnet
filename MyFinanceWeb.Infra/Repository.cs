@@ -30,20 +30,15 @@ public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity :
         _db.SaveChanges();
     }
 
-    public bool Excluir(int id)
+    public virtual bool Excluir(int id)
     {
-        var planoConta = _dbSet.Find(id);
-        if (planoConta == null)
+        var entity = _dbSet.Find(id);
+        if (entity == null)
         {
             return false;
         }
 
-        if (_dbSet.OfType<Transacao>().Any(item => item.PlanoContaId == id))
-        {
-            return false;
-        }
-
-        _dbSet.Remove(planoConta);
+        _dbSet.Remove(entity);
         _db.SaveChanges();
         return true;
     }
