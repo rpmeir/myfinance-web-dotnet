@@ -3,4 +3,5 @@
   <Project Path="MyFinanceWeb.Infra/MyFinanceWeb.Infra.csproj" />
   <Project Path="MyFinanceWeb.Mvc/MyFinanceWeb.Mvc.csproj" />
   <Project Path="MyFinanceWeb.Service/MyFinanceWeb.Service.csproj" />
+  <Project Path="MyFinanceWeb.Tests/MyFinanceWeb.Tests.csproj" />
 </Solution>
