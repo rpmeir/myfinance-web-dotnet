@@ -18,6 +18,7 @@ public class PlanoContaController : Controller
     }
 
     [HttpGet]
+    [Route("")]
     [Route("Index")]
     public IActionResult Index()
     {
@@ -81,7 +82,7 @@ public class PlanoContaController : Controller
     [Route("Excluir/{id}")]
     public IActionResult Excluir(int id)
     {
-        if (!_planoContaService.Excluir(id))
+        if (_planoContaService.Excluir(id) == 0)
         {
             return Conflict("Não é possível excluir este plano de contas porque ele possui transações associadas.");
         }

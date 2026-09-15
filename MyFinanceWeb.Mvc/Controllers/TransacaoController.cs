@@ -23,6 +23,7 @@ public class TransacaoController : Controller
     }
 
     [HttpGet]
+    [Route("")]
     [Route("Index")]
     public IActionResult Index()
     {
@@ -83,14 +84,22 @@ public class TransacaoController : Controller
             return BadRequest();
         }
 
-        _transacaoService.Cadastrar(new Transacao
+        if (!ModelState.IsValid)
+        {
+            ViewBag.PlanoContaList = _planoContaService.ListarRegistros();
+            return View(transacaoModel);
+        }
+
+        var transacao = new Transacao
         {
             Id = transacaoModel.Id,
             Historico = transacaoModel.Historico,
             Data = transacaoModel.Data,
             Valor = transacaoModel.Valor,
-            PlanoContaId = transacaoModel.PlanoContaId
-        });
+            PlanoContaId = transacaoModel.PlanoContaId.GetValueOrDefault()
+        };
+
+        _transacaoService.Cadastrar(transacao);
 
         return RedirectToAction("Index");
     }

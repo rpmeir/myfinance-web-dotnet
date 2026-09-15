@@ -143,6 +143,22 @@ A senha nao deve ser colocada em `appsettings.json`, no `Program.cs`, no `MyFina
 
 Em producao, prefira uma variavel de ambiente ou um gerenciador de secrets em vez de um arquivo `.env`.
 
+### Providers de banco de dados
+
+A aplicacao usa uma estrategia e um adapter de banco para configurar o `MyFinanceDbContext`:
+
+- `dotnet run` e o perfil de debug usam exclusivamente PostgreSQL. Nesse fluxo, `DefaultConnection` e `POSTGRES_PASSWORD` continuam obrigatorios.
+- O ambiente `Testing` nao registra PostgreSQL. A fixture de integracao do projeto `MyFinanceWeb.Tests` registra o provider EF Core InMemory, sem ler credenciais do PostgreSQL.
+- Os testes unitarios podem criar contextos isolados com `TestDatabaseBuilder`. Cada chamada gera um nome de banco exclusivo, permitindo a execucao paralela do MSTest sem compartilhar dados.
+
+Para executar os testes:
+
+```bash
+dotnet test MyFinanceWeb.Tests/MyFinanceWeb.Tests.csproj
+```
+
+O provider InMemory e apropriado para testar repositorios, services e o host HTTP sem infraestrutura externa. Ele nao reproduz completamente o comportamento relacional, SQL ou as constraints do PostgreSQL; esses casos devem ser validados com testes de integracao apontando para uma instancia PostgreSQL dedicada.
+
 ## 5. Banco de dados com Docker Compose
 
 O [compose.yaml](compose.yaml) executa `postgres:16` com:

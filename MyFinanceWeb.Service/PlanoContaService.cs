@@ -13,12 +13,12 @@ public class PlanoContaService : IPlanoContaService
         _planoContaRepository = planoContaRepository;
     }
 
-    public void Cadastrar(PlanoConta entity)
+    public int Cadastrar(PlanoConta entity)
     {
-        _planoContaRepository.Cadastrar(entity);
+        return _planoContaRepository.Cadastrar(entity);
     }
 
-    public bool Excluir(int id)
+    public int Excluir(int id)
     {
         return _planoContaRepository.Excluir(id);
     }

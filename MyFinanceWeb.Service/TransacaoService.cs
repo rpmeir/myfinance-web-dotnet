@@ -13,12 +13,12 @@ public class TransacaoService : ITransacaoService
         _transacaoRepository = transacaoRepository;
     }
 
-    public void Cadastrar(Transacao entity)
+    public int Cadastrar(Transacao entity)
     {
-        _transacaoRepository.Cadastrar(entity);
+        return _transacaoRepository.Cadastrar(entity);
     }
 
-    public bool Excluir(int id)
+    public int Excluir(int id)
     {
         return _transacaoRepository.Excluir(id);
     }

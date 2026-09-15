@@ -2,8 +2,9 @@
     const form = document.getElementById('transacaoForm');
     const visibleValue = document.getElementById('ValorDisplay');
     const numericValue = document.getElementById('Valor');
+    const planoConta = document.getElementById('PlanoContaId');
 
-    if (!form || !visibleValue || !numericValue) {
+    if (!form || !visibleValue || !numericValue || !planoConta) {
         return;
     }
 
@@ -30,7 +31,16 @@
 
     visibleValue.addEventListener('input', updateValue);
     visibleValue.addEventListener('blur', updateValue);
-    form.addEventListener('submit', updateValue);
+    // form.addEventListener('submit', function (event) {
+    //     if (!planoConta.value) {
+    //         event.preventDefault();
+    //         alert('Informe o plano de conta.');
+    //         planoConta.focus();
+    //         return;
+    //     }
+
+    //     updateValue();
+    // });
 
     updateValue();
 })();

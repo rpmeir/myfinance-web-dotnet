@@ -4,6 +4,8 @@ using MyFinanceWeb.Mvc.Models;
 
 namespace MyFinanceWeb.Mvc.Controllers;
 
+[Route("")]
+[Route("[controller]")]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -13,11 +15,16 @@ public class HomeController : Controller
         _logger = logger;
     }
 
+    [HttpGet]
+    [Route("Index")]
+    [Route("")]
     public IActionResult Index()
     {
         return View();
     }
 
+    [HttpGet]
+    [Route("Privacy")]
     public IActionResult Privacy()
     {
         return View();

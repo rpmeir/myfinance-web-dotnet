@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace MyFinanceWeb.Mvc.Models;
 
 public class TransacaoModel
@@ -7,5 +9,6 @@ public class TransacaoModel
     public DateTime Data { get; set; }
     public decimal Valor { get; set; }
     public string Tipo { get; set; } = string.Empty;
-    public int PlanoContaId { get; set; }
+    [Required(ErrorMessage = "Informe o plano de conta.")]
+    public int? PlanoContaId { get; set; }
 }

@@ -1,28 +1,27 @@
-    function Novo() {
-        window.location.href = '/Transacao/Cadastrar';
+function Novo() {
+    window.location.href = '/Transacao/Cadastrar';
+}
+
+function Atualizar(id) {
+    window.location.href = '/Transacao/Cadastrar/' + id;
+}
+
+function Excluir(id) {
+    if (!confirm('Deseja excluir este item?')) {
+        return;
     }
 
-    function Atualizar(id) {
-        // Implement the logic to handle the "Editar" action
-        window.location.href = '/Transacao/Cadastrar/' + id;
-    }
-
-    function Excluir(id) {
-        if (!confirm('Deseja excluir este item?')) {
-            return;
+    fetch('/Transacao/Excluir/' + id, {
+        method: 'DELETE'
+    })
+    .then(function (response) {
+        if (!response.ok) {
+            throw new Error('Falha ao excluir o item.');
         }
 
-        fetch('/Transacao/Excluir/' + id, {
-            method: 'DELETE'
-        })
-            .then(function (response) {
-                if (!response.ok) {
-                    throw new Error('Falha ao excluir o item.');
-                }
-
-                window.location.reload();
-            })
-            .catch(function (error) {
-                alert(error.message);
-            });
-    }
+        window.location.reload();
+    })
+    .catch(function (error) {
+        alert(error.message);
+    });
+}

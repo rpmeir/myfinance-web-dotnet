@@ -20,6 +20,15 @@
     </PackageReference>
     <PackageReference Include="MSTest.TestAdapter" Version="4.4.0" />
     <PackageReference Include="MSTest.TestFramework" Version="4.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.31" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.31" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../MyFinanceWeb.Domain/MyFinanceWeb.Domain.csproj" />
+    <ProjectReference Include="../MyFinanceWeb.Infra/MyFinanceWeb.Infra.csproj" />
+    <ProjectReference Include="../MyFinanceWeb.Mvc/MyFinanceWeb.Mvc.csproj" />
+    <ProjectReference Include="../MyFinanceWeb.Service/MyFinanceWeb.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -6,6 +6,16 @@ namespace MyFinanceWeb.Infra.Repositories
 {
     public class TransacaoRepository(MyFinanceDbContext dbContext) : Repository<Transacao>(dbContext), ITransacaoRepository
     {
+        public override int Cadastrar(Transacao entity)
+        {
+            if (entity.PlanoContaId == 0)
+            {
+                return 0;
+            }
+            _dbSet.Add(entity);
+            return _db.SaveChanges();
+        }
+
         public override List<Transacao> ListarRegistros()
         {
             return _dbSet.Include(transacao => transacao.PlanoConta)

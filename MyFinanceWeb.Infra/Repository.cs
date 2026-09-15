@@ -17,7 +17,7 @@ public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity :
         _dbSet = _db.Set<TEntity>();
     }
 
-    public void Cadastrar(TEntity entity)
+    public virtual int Cadastrar(TEntity entity)
     {
         if (entity.Id == 0)
         {
@@ -27,20 +27,19 @@ public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity :
         {
             _dbSet.Update(entity);
         }
-        _db.SaveChanges();
+        return _db.SaveChanges();
     }
 
-    public virtual bool Excluir(int id)
+    public virtual int Excluir(int id)
     {
         var entity = _dbSet.Find(id);
         if (entity == null)
         {
-            return false;
+            return 0;
         }
 
         _dbSet.Remove(entity);
-        _db.SaveChanges();
-        return true;
+        return _db.SaveChanges();
     }
 
     public virtual List<TEntity> ListarRegistros()

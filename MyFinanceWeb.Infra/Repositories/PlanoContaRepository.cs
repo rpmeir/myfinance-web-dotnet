@@ -6,22 +6,21 @@ namespace MyFinanceWeb.Infra.Repositories
 {
     public class PlanoContaRepository(MyFinanceDbContext dbContext) : Repository<PlanoConta>(dbContext), IPlanoContaRepository
     {
-        public override bool Excluir(int id)
+        public override int Excluir(int id)
         {
             var entity = _dbSet.Find(id);
             if (entity == null)
             {
-                return false;
+                return 0;
             }
 
             if (_db.Set<Transacao>().Any(item => item.PlanoContaId == id))
             {
-                return false;
+                return 0;
             }
 
             _dbSet.Remove(entity);
-            _db.SaveChanges();
-            return true;
+            return _db.SaveChanges();
         }
     }
 }
