@@ -25,7 +25,15 @@ public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity :
         }
         else
         {
-            _dbSet.Update(entity);
+            var trackedEntity = _dbSet.Find(entity.Id);
+            if (trackedEntity == null)
+            {
+                _dbSet.Update(entity);
+            }
+            else
+            {
+                _db.Entry(trackedEntity).CurrentValues.SetValues(entity);
+            }
         }
         return _db.SaveChanges();
     }

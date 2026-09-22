@@ -12,8 +12,8 @@ namespace MyFinanceWeb.Infra.Repositories
             {
                 return 0;
             }
-            _dbSet.Add(entity);
-            return _db.SaveChanges();
+
+            return base.Cadastrar(entity);
         }
 
         public override List<Transacao> ListarRegistros()
